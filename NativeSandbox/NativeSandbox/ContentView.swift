@@ -38,9 +38,13 @@ struct ContentView: View {
                     """
                 )
                 print(result.count)
-                let start = result.startIndex
-                let end = result.index(result.startIndex, offsetBy: min(50, result.count))
-                print(result[start..<end] + " ...")
+                if result.contains("snError") || result.contains("error") {
+                    print(result)
+                } else {
+                    let start = result.startIndex
+                    let end = result.index(result.startIndex, offsetBy: min(50, result.count))
+                    print(result[start..<end] + " ...")
+                }
             }
         }
         .padding()

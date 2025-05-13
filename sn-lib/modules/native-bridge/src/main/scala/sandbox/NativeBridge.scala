@@ -42,14 +42,32 @@ object NativeBridge {
                   printer.print(result.asJson)
                 )
               case Left(error)  =>
-                stringToCString(s"""{ "error": "${error.show.replace("\"", "\\\"")}" }""")
+                stringToCString(
+                  JsonObject(
+                    "snError"     -> "DecodingFailure".asJson,
+                    "details"     -> error.show.asJson,
+                    "parsedInput" -> json,
+                  ).asJson.noSpaces
+                )
+
             }
           case Left(error) =>
-            stringToCString(s"""{ "error": "${error.show.replace("\"", "\\\"")}" }""")
+            stringToCString(
+              JsonObject(
+                "snError" -> "ParsingFailure".asJson,
+                "details" -> error.show.asJson,
+                "input"   -> inputString.asJson,
+              ).asJson.noSpaces
+            )
         }
       } catch {
         case error: Throwable =>
-          stringToCString(s"""{ "error": "${error.getMessage.replace("\"", "\\\"")}" }""")
+          stringToCString(
+            JsonObject(
+              "snError" -> error.getClass.getName.asJson,
+              "details" -> error.getMessage.asJson,
+            ).asJson.noSpaces
+          )
 //      } finally {
 //        System.gc()
       }
