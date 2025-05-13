@@ -27,6 +27,24 @@ object NativeBridge {
       CoreLogic.sampleLogic(input).asJson
     }
 
+  @exported("native_sandbox_test_no_input")
+  def native_sandbox_test_no_input(): Unit = {
+    try {
+      given LocalTimeZone = LocalTimeZone("Europe/Warsaw")
+
+      val result = CoreLogic.sampleLogic(SampleInput(
+        data = JsonObject(),
+        depth = 12,
+        systemTimezone = "Europe/Warsaw"
+      )).asJson.noSpaces
+
+      println(result.length)
+    } catch {
+      case e: Throwable =>
+        e.printStackTrace()
+    }
+  }
+
   private class InteropWithInput[In: Decoder] {
 
     def run[Out: Encoder](c_input: CString)(systemTimezone: In => String)(body: LocalTimeZone ?=> In => Out): CString =

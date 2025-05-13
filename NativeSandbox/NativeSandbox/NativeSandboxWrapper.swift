@@ -29,6 +29,18 @@ enum NativeSandboxWrapper {
         )
     }
 
+    static func native_sandbox_test_no_input() {
+        if !initialized {
+            print("!!--------- sn runtime not initialized ---------!!")
+        }
+        if busy {
+            print("!!--------- concurrent invocation ---------!!")
+        }
+        busy = true
+        NativeSandboxLib.native_sandbox_test_no_input()
+        busy = false
+    }
+
     ///  helpers
 
     private static var busy = false
