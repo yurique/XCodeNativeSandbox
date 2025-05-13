@@ -71,7 +71,7 @@ lazy val nativeBridgeIos =
         c.withBuildTarget(BuildTarget.libraryStatic)
           .withLTO(LTO.none) // thin
           .withMode(Mode.releaseFast)
-          .withGC(GC.immix)
+          .withGC(GC.boehm)
           .withMultithreading(false)
           .withTargetTriple(
             "arm64-apple-ios"
@@ -107,7 +107,7 @@ lazy val nativeBridgeSimulator =
         c.withBuildTarget(BuildTarget.libraryStatic)
           .withLTO(LTO.none) // thin
           .withMode(Mode.releaseFast)
-          .withGC(GC.immix)
+          .withGC(GC.boehm)
           .withMultithreading(false)
           .withTargetTriple(
             "arm64-apple-ios-simulator"

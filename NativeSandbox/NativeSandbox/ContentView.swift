@@ -36,17 +36,17 @@ struct ContentView: View {
                         "systemTimezone": "\(systemTimezoneId())"
                     }
                     """
-//                let result = NativeSandboxWrapper.native_sandbox_test(input)
-//                
-//                print(result.count)
-//                if result.contains("snError") || result.contains("error") {
-//                    print(result)
-//                } else {
-//                    let start = result.startIndex
-//                    let end = result.index(result.startIndex, offsetBy: min(50, result.count))
-//                    print(result[start..<end] + " ...")
-//                }
-                NativeSandboxWrapper.native_sandbox_test_no_input()
+                let result = NativeSandboxWrapper.native_sandbox_test(input)
+                
+                print(result.count)
+                if result.contains("snError") || result.contains("error") {
+                    print(result)
+                } else {
+                    let start = result.startIndex
+                    let end = result.index(result.startIndex, offsetBy: min(50, result.count))
+                    print(result[start..<end] + " ...")
+                }
+//                NativeSandboxWrapper.native_sandbox_test_no_input()
             }
         }
         .padding()

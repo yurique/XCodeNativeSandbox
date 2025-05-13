@@ -11,6 +11,10 @@
 		F2B651C32DD3891300D8BAB8 /* NativeSandboxLib.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2B651C12DD3891300D8BAB8 /* NativeSandboxLib.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F2B651C62DD3995A00D8BAB8 /* ConfigOverride.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F2B651C52DD3995A00D8BAB8 /* ConfigOverride.xcconfig */; };
 		F2B651C72DD3995A00D8BAB8 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F2B651C42DD3995A00D8BAB8 /* Config.xcconfig */; };
+		F2E19D202DD3E2C5002EFB62 /* LibCord.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E19D1F2DD3E2C5002EFB62 /* LibCord.xcframework */; };
+		F2E19D212DD3E2C5002EFB62 /* LibCord.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2E19D1F2DD3E2C5002EFB62 /* LibCord.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F2E19D232DD3E2D6002EFB62 /* LibGC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E19D222DD3E2D6002EFB62 /* LibGC.xcframework */; };
+		F2E19D242DD3E2D6002EFB62 /* LibGC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2E19D222DD3E2D6002EFB62 /* LibGC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +41,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F2E19D242DD3E2D6002EFB62 /* LibGC.xcframework in Embed Frameworks */,
 				F2B651C32DD3891300D8BAB8 /* NativeSandboxLib.xcframework in Embed Frameworks */,
+				F2E19D212DD3E2C5002EFB62 /* LibCord.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,6 +57,8 @@
 		F2B651C12DD3891300D8BAB8 /* NativeSandboxLib.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = NativeSandboxLib.xcframework; path = "../sn-lib/NativeSandboxLib.xcframework"; sourceTree = "<group>"; };
 		F2B651C42DD3995A00D8BAB8 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		F2B651C52DD3995A00D8BAB8 /* ConfigOverride.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ConfigOverride.xcconfig; sourceTree = "<group>"; };
+		F2E19D1F2DD3E2C5002EFB62 /* LibCord.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LibCord.xcframework; path = "../sn-lib/LibCord.xcframework"; sourceTree = "<group>"; };
+		F2E19D222DD3E2D6002EFB62 /* LibGC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LibGC.xcframework; path = "../sn-lib/LibGC.xcframework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -76,7 +84,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2E19D232DD3E2D6002EFB62 /* LibGC.xcframework in Frameworks */,
 				F2B651C22DD3891300D8BAB8 /* NativeSandboxLib.xcframework in Frameworks */,
+				F2E19D202DD3E2C5002EFB62 /* LibCord.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +133,8 @@
 		F2B651AC2DD387F600D8BAB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F2E19D222DD3E2D6002EFB62 /* LibGC.xcframework */,
+				F2E19D1F2DD3E2C5002EFB62 /* LibCord.xcframework */,
 				F2B651C12DD3891300D8BAB8 /* NativeSandboxLib.xcframework */,
 			);
 			name = Frameworks;
