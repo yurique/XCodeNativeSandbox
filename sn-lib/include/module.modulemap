@@ -1,0 +1,4 @@
+module NativeSandboxLib {
+  umbrella header "native_sandbox.h"
+  export *
+}

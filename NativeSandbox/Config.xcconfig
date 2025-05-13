@@ -1,0 +1,6 @@
+DEVELOPER_TEAM = ##TEAM_ID##
+
+GC_INITIAL_HEAP_SIZE = 32M
+GC_MAXIMUM_HEAP_SIZE = 256M
+
+#include? "ConfigOverride.xcconfig"
