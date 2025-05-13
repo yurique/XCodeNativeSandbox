@@ -7,6 +7,9 @@ import io.circe.syntax.*
 
 import java.nio.charset.StandardCharsets
 import scala.scalanative.libc.*
+import scala.scalanative.runtime.Intrinsics.castIntToRawSizeUnsigned
+import scala.scalanative.runtime.Intrinsics.unsignedOf
+import scala.scalanative.runtime.ffi
 import scala.scalanative.unsafe.*
 
 object NativeBridge {
@@ -38,11 +41,11 @@ object NativeBridge {
               case Right(input) =>
                 val ltz    = LocalTimeZone(systemTimezone(input))
                 val result = body(using ltz)(json)(input)
-                stringToCString(
+                toCString(
                   printer.print(result.asJson)
                 )
               case Left(error)  =>
-                stringToCString(
+                toCString(
                   JsonObject(
                     "snError"     -> "DecodingFailure".asJson,
                     "details"     -> error.show.asJson,
@@ -52,7 +55,7 @@ object NativeBridge {
 
             }
           case Left(error) =>
-            stringToCString(
+            toCString(
               JsonObject(
                 "snError" -> "ParsingFailure".asJson,
                 "details" -> error.show.asJson,
@@ -62,7 +65,7 @@ object NativeBridge {
         }
       } catch {
         case error: Throwable =>
-          stringToCString(
+          toCString(
             JsonObject(
               "snError" -> error.getClass.getName.asJson,
               "details" -> error.getMessage.asJson,
@@ -76,15 +79,24 @@ object NativeBridge {
 
   private def interop[In: Decoder]: InteropWithInput[In] = new InteropWithInput[In]
 
-  private def stringToCString(string: String): CString = {
-    val bytes  = string.getBytes(StandardCharsets.UTF_8)
-    val result = stdlib.malloc(bytes.length + 1)
+  // copy from std toCString, but without Zone
+  private def toCString(str: String): CString = {
+    if str == null then {
+      null
+    } else {
+      val bytes = str.getBytes(StandardCharsets.UTF_8)
+      if bytes.nonEmpty then {
+        val len     = bytes.length
+        val rawSize = castIntToRawSizeUnsigned(len + 1)
+        val size    = unsignedOf(rawSize)
 
-    bytes.zipWithIndex.foreach { case (byte, index) =>
-      !(result + index) = byte
+        val cstr = stdlib.malloc(size)
+        val _    = ffi.memcpy(cstr, bytes.at(0), size)
+        cstr(len) = 0.toByte
+
+        cstr
+      } else c""
     }
-    !(result + string.length) = 0.toByte // Null terminator
-    result
   }
 
   @exported("free_bridge_result")

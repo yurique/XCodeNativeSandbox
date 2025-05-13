@@ -26,7 +26,7 @@ struct ContentView: View {
             Button(
                 "Invoke the other universe!"
             ) {
-                let result = NativeSandboxWrapper.native_sandbox_test(
+                let input =
                     """
                     {
                         "data": {
@@ -36,7 +36,8 @@ struct ContentView: View {
                         "systemTimezone": "\(systemTimezoneId())"
                     }
                     """
-                )
+                let result = NativeSandboxWrapper.native_sandbox_test(input)
+                
                 print(result.count)
                 if result.contains("snError") || result.contains("error") {
                     print(result)
